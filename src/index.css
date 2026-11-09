@@ -1,0 +1,269 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Calm "Ocean" theme: cool white background, soft teal (analogous to the
+  logo greens), sand + sky + blush tints for sections, gentle shadows instead
+  of hard borders, larger type (17px base) for easy reading at any age.
+*/
+
+/* ---------- Static palette ---------- */
+@theme {
+  --font-sans: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit Variable", "Plus Jakarta Sans Variable", ui-sans-serif, sans-serif;
+
+  /* forest = logo dark green #0A473B */
+  --color-forest-50: #eef5f1;
+  --color-forest-100: #d6e8de;
+  --color-forest-200: #add2bf;
+  --color-forest-300: #7fb69d;
+  --color-forest-400: #55977c;
+  --color-forest-500: #3a8064;
+  --color-forest-600: #2f7a5c;
+  --color-forest-700: #276a4f;
+  --color-forest-800: #1f5440;
+  --color-forest-900: #0a473b;
+  --color-forest-950: #0b2a22;
+
+  /* leaf = logo light green #4E9E54 */
+  --color-leaf-50: #f0f8f1;
+  --color-leaf-100: #dcefdd;
+  --color-leaf-200: #bbdfbd;
+  --color-leaf-300: #91c995;
+  --color-leaf-400: #6db472;
+  --color-leaf-500: #4e9e54;
+  --color-leaf-600: #3f8445;
+  --color-leaf-700: #346a39;
+  --color-leaf-800: #2b5430;
+  --color-leaf-900: #234426;
+
+  --shadow-soft: 0 1px 2px rgb(22 38 32 / 0.04), 0 6px 20px -10px rgb(22 38 32 / 0.10);
+  --shadow-lift: 0 2px 6px rgb(22 38 32 / 0.04), 0 18px 40px -16px rgb(22 38 32 / 0.18);
+
+  --animate-fade-in: fade-in 0.3s ease-out both;
+  --animate-rise: rise 0.45s cubic-bezier(0.22, 0.8, 0.24, 1) both;
+  --animate-pulse-ring: pulse-ring 2.4s ease-out infinite;
+
+  @keyframes fade-in {
+    from { opacity: 0 }
+    to { opacity: 1 }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(8px) }
+    to { opacity: 1; transform: translateY(0) }
+  }
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 rgb(78 158 84 / 0.45) }
+    70% { box-shadow: 0 0 0 9px rgb(78 158 84 / 0) }
+    100% { box-shadow: 0 0 0 0 rgb(78 158 84 / 0) }
+  }
+}
+
+/* ---------- Semantic tokens (switch with .dark) ---------- */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-on-primary: var(--on-primary);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-ink: var(--primary-ink);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
+  --color-sand: var(--sand);
+  --color-sky: var(--sky);
+  --color-blush: var(--blush);
+}
+
+:root {
+  --bg: #f5f9f9;
+  --surface: #ffffff;
+  --surface-2: #eef5f5;
+  --ink: #18302f;
+  --muted: #587170;
+  --line: #e0ebea;
+  --primary: #1f7a7a;
+  --primary-hover: #186666;
+  --on-primary: #ffffff;
+  --primary-soft: #e2f2f1;
+  --primary-ink: #176464;
+  --accent: #4e9e54;
+  --accent-soft: #e8f5ee;
+  --accent-ink: #2b6f4a;
+  --sand: #f5efe6;
+  --sky: #e6f1f7;
+  --blush: #f9eeea;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #0f1819;
+  --surface: #152224;
+  --surface-2: #1b2b2d;
+  --ink: #e3efef;
+  --muted: #9db5b4;
+  --line: #233638;
+  --primary: #6cc7c2;
+  --primary-hover: #88d4d0;
+  --on-primary: #0b1a1a;
+  --primary-soft: #1a3536;
+  --primary-ink: #8fd9d4;
+  --accent: #7cc59a;
+  --accent-soft: #1b3029;
+  --accent-ink: #9ad6b0;
+  --sand: #1c2220;
+  --sky: #16242b;
+  --blush: #251e1d;
+  color-scheme: dark;
+}
+
+/* ---------- Alternative palettes: <html data-palette="…"> ---------- */
+/* Sage — soft green on ivory (previous default) */
+:root[data-palette="sage"] {
+  --bg: #f8f7f3; --surface: #ffffff; --surface-2: #f2f5f2; --ink: #1d2b27; --muted: #5f6f69; --line: #e6e9e4;
+  --primary: #2f7a5c; --primary-hover: #276a4f; --on-primary: #ffffff; --primary-soft: #e8f3ec; --primary-ink: #23634a;
+  --accent: #4e9e54; --accent-soft: #edf6ee; --accent-ink: #2b6f4a;
+  --sand: #f4eee4; --sky: #e9f2f4; --blush: #fbefe9;
+}
+:root[data-palette="sage"].dark {
+  --bg: #111917; --surface: #17211e; --surface-2: #1d2925; --ink: #e6eeea; --muted: #a3b4ad; --line: #26332f;
+  --primary: #7cc59a; --primary-hover: #95d3ad; --on-primary: #0d1a15; --primary-soft: #1f3329; --primary-ink: #9ad6b0;
+  --accent: #7cc59a; --accent-soft: #1d3027; --accent-ink: #9ad6b0;
+  --sand: #1b2320; --sky: #172327; --blush: #241d1c;
+}
+
+/* Mist — soft trustworthy blue */
+:root[data-palette="mist"] {
+  --bg: #f6f8fb; --surface: #ffffff; --surface-2: #eff3f8; --ink: #1b2a3a; --muted: #5a6b7d; --line: #e2e8ef;
+  --primary: #3568a8; --primary-hover: #2b5790; --on-primary: #ffffff; --primary-soft: #e7eff9; --primary-ink: #2a5590;
+  --accent: #4e9e54; --accent-soft: #eaf5ec; --accent-ink: #2b6f4a;
+  --sand: #f5f0e8; --sky: #e9f4ee; --blush: #f8eef0;
+}
+:root[data-palette="mist"].dark {
+  --bg: #10151c; --surface: #161e27; --surface-2: #1c2631; --ink: #e4eaf1; --muted: #9eaec0; --line: #25313e;
+  --primary: #8db4e8; --primary-hover: #a6c5ee; --on-primary: #0d1622; --primary-soft: #1d2b3d; --primary-ink: #a9c8f0;
+  --accent: #7cc59a; --accent-soft: #1b3029; --accent-ink: #9ad6b0;
+  --sand: #1d211f; --sky: #172420; --blush: #241e21;
+}
+
+/* Earth — warm clay on cream, homely and grounded */
+:root[data-palette="earth"] {
+  --bg: #fbf8f2; --surface: #fffdf9; --surface-2: #f4efe6; --ink: #2b2a24; --muted: #6b675c; --line: #e9e2d6;
+  --primary: #a85a3c; --primary-hover: #8f4b31; --on-primary: #ffffff; --primary-soft: #f6e7df; --primary-ink: #8e4a30;
+  --accent: #4e9e54; --accent-soft: #e9f2e6; --accent-ink: #3d6b3f;
+  --sand: #f3ece0; --sky: #e9f0e6; --blush: #f7eae3;
+}
+:root[data-palette="earth"].dark {
+  --bg: #171411; --surface: #1f1b17; --surface-2: #27221d; --ink: #f0e8de; --muted: #b5a999; --line: #332c25;
+  --primary: #e0a080; --primary-hover: #e8b497; --on-primary: #1e120c; --primary-soft: #3a2a21; --primary-ink: #edb99c;
+  --accent: #8fc98f; --accent-soft: #1f2c1f; --accent-ink: #a8d6a8;
+  --sand: #221e19; --sky: #1c221b; --blush: #2a1f1a;
+}
+
+/* Lavender — gentle, serene violet */
+:root[data-palette="lavender"] {
+  --bg: #f8f7fb; --surface: #ffffff; --surface-2: #f2f0f8; --ink: #26233a; --muted: #67637c; --line: #e6e3ef;
+  --primary: #5e5aa8; --primary-hover: #4f4b93; --on-primary: #ffffff; --primary-soft: #ecebf8; --primary-ink: #4b4795;
+  --accent: #4e9e54; --accent-soft: #eaf5ec; --accent-ink: #2b6f4a;
+  --sand: #f6f0e8; --sky: #eaf0f8; --blush: #f8ecf0;
+}
+:root[data-palette="lavender"].dark {
+  --bg: #13121a; --surface: #1a1924; --surface-2: #22202e; --ink: #e9e7f2; --muted: #a8a4bf; --line: #2c2a3a;
+  --primary: #a9a6ec; --primary-hover: #bdbaf2; --on-primary: #15142a; --primary-soft: #2a2843; --primary-ink: #c2bff5;
+  --accent: #7cc59a; --accent-soft: #1b3029; --accent-ink: #9ad6b0;
+  --sand: #211f1d; --sky: #1a1f2a; --blush: #261d24;
+}
+
+@layer base {
+  html {
+    font-size: 106.25%; /* 17px base — easier reading for everyone */
+    -webkit-tap-highlight-color: transparent;
+    scroll-padding-top: 5.5rem;
+    overflow-x: clip; /* never allow sideways page scroll on phones */
+  }
+  body {
+    @apply bg-bg font-sans leading-relaxed text-ink antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display leading-tight tracking-tight text-balance;
+  }
+  :focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--primary) 55%, transparent);
+    outline-offset: 2px;
+  }
+  button { cursor: pointer; }
+  ::selection { background: var(--primary-soft); color: var(--primary-ink); }
+}
+
+/*
+  Auto-fit layouts — no fixed column counts.
+  flex-fill: children grow to share each row and wrap when they would get
+             narrower than --min; the last row stretches so nothing is left alone.
+  grid-fill: equal-width columns, as many as fit (for things that must line up,
+             e.g. time slots).
+  Set the minimum item width per container: [--min:16rem] sm:[--min:20rem]
+  Don't make a flex-fill a *direct* child of another flex-fill (its own --min
+  would size it in the parent row) — wrap it in a <div> instead.
+*/
+@utility flex-fill {
+  display: flex;
+  flex-wrap: wrap;
+  & > * {
+    flex: 1 1 min(100%, var(--min, 16rem));
+    min-width: 0;
+  }
+}
+@utility grid-fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--min, 16rem)), 1fr));
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+@layer components {
+  .container-page { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
+
+  .btn {
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-full px-5 text-[0.9375rem] font-semibold whitespace-nowrap transition-[background-color,color,border-color,box-shadow,transform] duration-200 select-none active:scale-[0.98] disabled:pointer-events-none disabled:opacity-45;
+  }
+  .btn-sm { @apply h-10 px-4 text-sm; }
+  .btn-lg { @apply h-[3.25rem] px-7 text-base; }
+  .btn-primary {
+    @apply bg-primary text-on-primary hover:bg-primary-hover;
+    box-shadow: 0 8px 18px -10px color-mix(in srgb, var(--primary) 75%, transparent);
+  }
+  .dark .btn-primary { box-shadow: none; }
+  .btn-secondary { @apply border border-line bg-surface text-ink hover:border-primary/30 hover:bg-surface-2; }
+  .btn-soft { @apply bg-primary-soft text-primary-ink hover:bg-primary/15; }
+  .btn-ghost { @apply text-muted hover:bg-surface-2 hover:text-ink; }
+  .btn-danger { @apply bg-red-600 text-white hover:bg-red-700; }
+  .icon-btn { @apply inline-flex size-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-surface-2 hover:text-ink; }
+
+  .card { @apply rounded-3xl border border-line/70 bg-surface shadow-soft dark:shadow-none; }
+  .card-hover { @apply transition-[box-shadow,transform,border-color] duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-lift; }
+
+  .chip {
+    @apply inline-flex h-10 items-center gap-1.5 rounded-full border border-line bg-surface px-4 text-sm font-medium whitespace-nowrap text-ink/80 transition-colors hover:border-primary/30 hover:bg-surface-2 hover:text-ink;
+  }
+  .chip-active { @apply border-primary/40 bg-primary-soft text-primary-ink hover:border-primary/40 hover:bg-primary-soft hover:text-primary-ink; }
+
+  .input {
+    @apply h-12 w-full rounded-2xl border border-line bg-surface px-4 text-base text-ink transition outline-none placeholder:text-muted/70 focus:border-primary/60 focus:ring-4 focus:ring-primary/12;
+  }
+  .label { @apply mb-2 block text-[0.9375rem] font-semibold text-ink; }
+  .badge { @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[0.8125rem] font-semibold whitespace-nowrap; }
+
+  .eyebrow { @apply text-[0.9375rem] font-semibold text-primary-ink; }
+  .section-title { @apply font-display text-[1.75rem] font-semibold text-ink sm:text-[2.25rem]; }
+  .link { @apply font-semibold text-primary-ink underline-offset-4 hover:underline; }
+  .icon-circle { @apply grid shrink-0 place-items-center rounded-full bg-primary-soft text-primary-ink; }
+}
