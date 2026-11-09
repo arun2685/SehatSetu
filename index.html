@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>SehatSetu — Talk to a doctor in 60 seconds</title>
+    <meta name="description" content="SehatSetu connects you with verified doctors: instant video consults and confirmed in-clinic appointments across India." />
+    <meta name="theme-color" content="#1F7A7A" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <script>
+      // Apply saved theme + palette before first paint to avoid a flash.
+      // Palette preview: add ?palette=sage|mist|earth|lavender (or ocean = default) to the URL.
+      try {
+        var q = new URLSearchParams(location.search).get('palette');
+        if (q) localStorage.setItem('ss-palette', q);
+        var pal = q || localStorage.getItem('ss-palette');
+        if (pal && pal !== 'ocean') document.documentElement.setAttribute('data-palette', pal);
+        var t = localStorage.getItem('ss-theme2') || 'light';
+        var dark = t === 'dark' || (t === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) document.documentElement.classList.add('dark');
+      } catch (e) {}
+    </script>
+    <script type="module" crossorigin src="./assets/index-Dr-wcQOX.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-ftIiiMOB.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
